@@ -13,7 +13,7 @@
 
 -- Imports using CTE's
 with github_timeline as (
-    select * from `bigquery-public-data.samples.github_timeline` limit 100
+    select * from `bigquery-public-data.samples.github_timeline`
 ),
 
 view_domain_name as (
@@ -45,7 +45,7 @@ github_timeline_simple as (
     from github_timeline
 )
 
-select * from (
+
 select 
     struct(gt.repository_url as base_url, gt.max_repository_forks as forks, gt.max_repository_size as size, 
     gt.repository_open_issues as open_issues, gt.repository_watchers as watchers) as repo_stats,
@@ -54,4 +54,3 @@ select
     case when gt.email_domain is not null then coalesce(vd.domain_name, 'Error') else vd.domain_name end as domain_name 
 from github_timeline_simple gt
 left join view_domain_name vd on gt.email_domain = vd.source_domain_code
-) where max_repository_forks != repository_forks
