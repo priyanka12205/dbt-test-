@@ -25,10 +25,10 @@ github_timeline_simple as (
     select distinct
             CONCAT(repository_url , '_' , repository_created_at , '_' , repository_pushed_at , '_' , actor_attributes_gravatar_id , '_' , created_at  ) as primary_key,
             TO_HEX(MD5(CONCAT(repository_url , '_' , repository_created_at , '_' , repository_pushed_at , '_' , actor_attributes_gravatar_id , '_' , created_at  ))) as hash_primary_key,
-            repository_url,
-            repository_created_at,
-            url,
-            type,
+            {{ trim_whitespaces('repository_url') }} as repository_url,
+            {{ trim_whitespaces('repository_created_at') }} as repository_created_at,
+            {{ trim_whitespaces('url') }} as url,
+            {{ trim_whitespaces('type') }} as type,
             ARRAY_REVERSE(SPLIT(actor_attributes_email, '.'))[SAFE_OFFSET(0)] as email_domain,
             
             -- Window functions for max calculations
