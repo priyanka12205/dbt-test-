@@ -7,3 +7,6 @@ packages:
 
   - package: dbt-labs/metrics
     version: 0.2.0
+
+  - git: "https://github.com/san089/dbt_common_utils.git"
+    revision: v0.0.1
