@@ -7,7 +7,7 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'default'
+profile: 'dbt_bigquery'
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -41,6 +41,5 @@ models:
       stage_data:
         +materialized: view
         +schema: dbt_staging_dataset
-        +database: local-talent-355615
     seeds:
-      +schema: dbt_seed_data
+      +schema: seed_data
